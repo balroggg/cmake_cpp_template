@@ -1,1 +1,7 @@
-# cmake_cpp_template
+# CMake cpp project template
+
+```
+mkdir build && cd build
+cmake .. -GNinja
+ninja
+```
