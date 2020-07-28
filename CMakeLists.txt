@@ -1,11 +1,14 @@
 cmake_minimum_required(VERSION 3.18 FATAL_ERROR)
 
 if (${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
-    message(
-            FATAL_ERROR
-            "In-source builds not allowed. Please make a new directory and run CMake from there. You may need to remove CMakeCache.txt."
-    )
-endif ()
+    message(FATAL_ERROR
+            "In-source builds not allowed. Please make a new directory and run CMake from there. You may need to remove CMakeCache.txt.")
+endif()
+
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE "Debug" CACHE STRING
+            "Default build type: Debug" FORCE)
+endif()
 
 project(hello_world)
 
@@ -56,9 +59,9 @@ target_link_libraries(tst Catch2)
 ENABLE_TESTING()
 ADD_TEST(tst tst)
 
-if (clang_tidy)
+if(clang_tidy)
     set_target_properties(
             hello_world
             PROPERTIES CXX_CLANG_TIDY ${clang_tidy})
-endif (clang_tidy)
+endif(clang_tidy)
 
